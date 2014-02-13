@@ -1,5 +1,5 @@
 <?php 
-	include "conexion/conexion.php"; 
+	include "generales/conexion_bbdd.php"; 
 	date_default_timezone_set('Europe/Madrid');
 	// *** Validate request to login to this site.
 	$MM_redirectLoginFailed = "Index.php"; //si mal volvemos al comienzo
@@ -62,11 +62,11 @@
 			&& $row_LoginRS['Pass'] == $password) {	
 			//comprobamos que el login optenido es el mismo que el login dado	
 			//register the session variables
-			$_SESSION['user'] = $row_LoginRS['Login'];
-			$_SESSION['pass'] = $row_LoginRS['Pass'];
-			$_SESSION['nombre'] = $row_LoginRS['Nombre'];
+			$_SESSION['User'] = $row_LoginRS['Login'];
+			$_SESSION['Pass'] = $row_LoginRS['Pass'];
+			$_SESSION['Nombre'] = $row_LoginRS['Nombre'];
 			$_SESSION['Id'] = $row_LoginRS['id'];
-			$_SESSION['tipo'] = $row_LoginRS['Id_tipo'];
+			$_SESSION['Tipo'] = $row_LoginRS['Id_tipo'];
 
 			$Login_correcto="INSERT into entrada (usuario, ip, fecha_entrada, intentos, entrada) values 
 			('".$loginUsername."','".$realip."','".date('Y-m-d H:i:s')."','1','CORRECTA')";

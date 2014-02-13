@@ -1,5 +1,5 @@
 <?php 
-require_once('../conexion/conexion.php'); 
+require_once('conexion_bbdd.php'); 
 /*Comprobar que el usuario esta registrado*/
 session_start();
 $MM_authorizedUsers = "";
