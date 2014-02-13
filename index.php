@@ -47,11 +47,7 @@
 	<!-- esto es la ventana emergente de loading -->
 	<div id="dialog-message" title="Accediendo">
 		<img src="images/loading.gif" alt="" name="logo" />
-		<p> 
-			<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;" id="mensaje" >
-				Procensando su petición
-			</span>
-		</p>
+		<p id="mensaje"> Procensando su petición </p>
 		
 	</div>
 
