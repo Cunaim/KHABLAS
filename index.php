@@ -27,11 +27,11 @@
 				<table>
 					<tr>
 						<td> <h4>Quién Eres?</h4> </td>
-						<td> <input type="text" id="txtuser" name="txtuser" placeholder="Usuario"/> </td>
+						<td> <input type="text" id="txtuser" name="txtuser" placeholder="Usuario" size="30" maxlength="30"/> </td>
 					</tr>
 					<tr>
 						<td> <h4>PALABRAS MÁGICAS</h4> </td>
-						<td> <input type="password" id="txtpass" name="txtpass" placeholder="Contraseña"/> </td>
+						<td> <input type="password" id="txtpass" name="txtpass" placeholder="Contraseña" size="30" maxlength="30"/> </td>
 					</tr>
 				</table>
 				<input type="button" id="btnvalidar" name="btnvalidar" value="ENTRAR" onclick="validar()" />
@@ -44,5 +44,16 @@
 			<a href="http://www.TWITTER.es/" target="_blank"><br>TWITTER</br></a>
 			<a href="http://www.LINKEDIN.es/" target="_blank"><br>LINKEDIN</br></a>
 		</footer>
+	<!-- esto es la ventana emergente de loading -->
+	<div id="dialog-message" title="Accediendo">
+		<img src="images/loading.gif" alt="" name="logo" />
+		<p> 
+			<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;" id="mensaje" >
+				Procensando su petición
+			</span>
+		</p>
+		
+	</div>
+
 	</body>
 </html>
