@@ -3,11 +3,12 @@
 	require_once('../generales/Cabecera.php');
 ?>
 
-<section class="formulario" id="formulario">
-	<form>
-	<h2> BIENVENIDO </h2>
-	<p> Aqui ponemos cualquier cosa que se te ocurre a modo bienvenida </p>
-</section>
+<article class=" col-sm-8" id="formulario">
+	<div class="welcome">
+    	<h1>ESTAS EN USUARIOS</h1>
+        <p style="text-align:center; font-size:18px;">En esta sección podrás gestionar todos lo usuarios que acceden a <h2>K-HABLS 360</h2></p>
+    </div>
+</article>
 
 <?php
 	//introducimos la parte fija de los pies

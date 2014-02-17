@@ -6,14 +6,13 @@
 	$tipos = mysql_query($tipo, $khablasweb) or die(mysql_error());
 	$row_tipo = mysql_fetch_assoc($tipos);
 
-	$permiso = "SELECT Id, Nombre FROM accion order by Nombre asc";
-	$permisos = mysql_query($permiso, $khablasweb) or die(mysql_error());
-	$row_permiso = mysql_fetch_assoc($permisos)
+	//aqui recibimos la accion que vamos a realizar despues
+	$accion_a_realizar = $_POST['accion'];
+
 ?>
-
-
 <form method="POST" action= "" enctype="multipart/form-data" name="form1" id="form1">
-	<h2> Nuevo Usuario </h2>
+	<h2> Consulta de Usuario </h2>
+	<label>Introduzca al menos un dato, para realizar la busqueda </label>
 	<table>
 		<tr>
 			<td> <label>Nombre</label> </td>
@@ -41,25 +40,11 @@
 				</select> 
 			</td>
 		</tr>
-		<tr>
-			<td> <label>Login</label> </td>
-			<td> <input type="text" id="txtuser" name="txtuser" placeholder="Login" size="40" maxlength="40"/> </td>
-			<td> <label>Contraseña</label> </td>
-			<td> <input type="password" id="txtpass" name="txtpass" placeholder="Contraseña" size="40" maxlength="40"/> </td>
-		</tr>
-		<tr>
-			<td> <label>Permisos</label> </td>
-			<td> <select id="txtpermisos" name="txtpermisos[]" multiple size="5">
-					<?php do{ ?>
-						<option value="<?php echo $row_permiso['Id']; ?>"><?php echo $row_permiso['Nombre']; ?></option>
-					<?php }while($row_permiso = mysql_fetch_assoc($permisos)); ?>
-				</select> </td>
-			<td></td>
-			<td></td>
-		</tr>
 	</table>
 	<div class="botones">
-		<input type="button" id="btncrear" name="btncrear" value="Crear" onclick="Crear_nuevo_user();"/>
+		<input type="hidden" id="txttipo_consulta" name="txttipo_consulta" value = "<?php echo $accion_a_realizar; ?>" />
+		<input type="button" id="btnbuscar" name="btnbuscar" value="Buscar" onclick="consultar_usuario();"/>
 	</div>
 </form>
+<div id="respuesta" name = "respuesta"> </div>
 

@@ -1,71 +1,159 @@
-$(function() {
-    $("#dialog-message").dialog({
-		autoOpen: false,
-		model: true,
-		width: "auto",
-		height: "auto",
-		show: {
-			effect: "blind",
-			duration: 1000
-		}
-    });
-});
-
-function abrir_enlace_user(enlace)
-{
-	$.ajax({
-        url:enlace,
-        type: "POST",
-        success: function(opciones){
-    		$( "#formulario" ).html(opciones);
-        }
-    })
-}
-
 function Crear_nuevo_user()
 {
-	var caracteres = new Array(" ","%","'");
-	var usuario = $("#txtuser").val();
-	var pass = $("#txtpass").val();
+	//para eviatar lios quitamos tonterias
+	var formulario = document.getElementById("form1")
+	var nombre = eliminar_caracteres_no_validos($("#txtnombre").val());
+	var apellidos = eliminar_caracteres_no_validos($("#txtapellido").val());
+	var dni = eliminar_caracteres_no_validos($("#txtdni").val());
+	var email = eliminar_caracteres_no_validos($("#txtemail").val());
+	var telefono = eliminar_caracteres_no_validos($("#txttelefono").val());
+	var tipo = eliminar_caracteres_no_validos($("#txttipo").val());
+	var usuario = eliminar_caracteres_no_validos($("#txtuser").val());
+	var pass = eliminar_caracteres_no_validos($("#txtpass").val());
 	var correcto = 1;
+
 	//1º Activamos el aviso para que sea visible
 	$( "#dialog-message" ).dialog( "open" );
-
-	//para eviatar lios quitamos los espacios
-	for (i=0; i<3;i++)
+	
+	//comprobamos que todos los datos son correctos
+	for(i=0; i < formulario.elements.length; i++)
 	{
-		usuario = usuario.replace(/caracteres[i]/gi,"");
-		pass = pass.replace(/caracteres[i]/gi,"");
+		if(formulario.elements[i].value.length == 0 && formulario.elements[i].name != "txtpermisos")
+		{
+			$("#mensaje").html("Error: debe completar todos los datos del formulario");
+			formulario.elements[i].focus();
+			correcto = 0;
+			break;
+		}
+		else if (formulario.elements[i].name == "txttipo" && formulario.elements[i].value == 0)
+		{
+			$("#mensaje").html("Error: debe completar todos los datos del formulario");
+			formulario.elements[i].focus();
+			correcto = 0;
+			break;
+		}
+		else if(formulario.elements[i].name == "txtdni" && formulario.elements[i].value.length != 9)
+		{
+			$("#mensaje").html("Error: El DNI introducido no es válido");
+			formulario.elements[i].focus();
+			correcto = 0;
+			break;
+		}
+		else if(formulario.elements[i].name == "txttelefono" && formulario.elements[i].value.length != 9)
+		{
+			$("#mensaje").html("Error: El telefono introducido no es valido");
+			formulario.elements[i].focus();
+			correcto = 0;
+			break;
+		}
+		else if(formulario.elements[i].name == "txtemail" && !validateEmail(formulario.elements[i].value))
+		{
+			$("#mensaje").html("Error: El Email introducido no es valido");
+			formulario.elements[i].focus();
+			correcto = 0;
+			break;
+		}
+		else if(formulario.elements[i].name == "txtpermisos" && document.elements[i].selectedIndex == -1)
+		{
+			$("#mensaje").html("Error: Debe Introducir algun permiso al usuario");
+			formulario.elements[i].focus();
+			correcto = 0;
+			break;
+		}
 	}
 
-	//validaciones previas: comprobar que se ha introducido el usuario y la password
-	if(pass.length == 0 || usuario.length == 0){
-		$( "#dialog-message" ).dialog( "open" );
-		$("#mensaje").html("Error: El usuario y/o clave no pueden estar vacios");
-		correcto = 0;
-	}
 	if(correcto == 1)
 	{
 		//2º mandamos la información para validar el user/pass
 		var parametros = {
-	        "usuario" : $("#txtuser").val(),
-	        "pass" : $("#txtpass").val()
-	    };
+	        "nombre" : $("#txtnombre").val(),
+			"apellidos" : $("#txtapellido").val(),
+			"dni" : $("#txtdni").val(),
+			"email" : $("#txtemail").val(),
+			"telefono" : $("#txttelefono").val(),
+			"tipo" : $("#txttipo").val(),
+			"usuario" : $("#txtuser").val(),
+			"pass" : $("#txtpass").val(),
+			"permisos" : $("#txtpermisos").val()
+		}
 		$.ajax({
-	        url:"Validar.php",
+	        url:"guardar_nuevo_usuario.php",
 	        dataType : "json",//el tipo de datos
 	        data:parametros,
 	        type: "POST",
 	        success: function(opciones){
-	        	if(opciones == 1){ //todo correcto
-	        		$( "#dialog-message" ).dialog( "close" );
-	        		document.location.href="principal.php";
+	        	if(opciones == 0) { //todo correcto
+	        		for(i=0; i< formulario.elements.length; i++) {
+						if(formulario.elements[i].name == "txttipo")
+							formulario.elements[i].value = 0;
+						else
+							if(formulario.elements[i].name != "btncrear")
+								formulario.elements[i].value = "";
+					}
+	        		$("#mensaje").html("Usuario Dado de alta Correctamente");
 	        	}
-	        	else
-	        	{
-	        		$("#mensaje").html("Error: El usuario y/o clave no son correcto");
+	        	else {
+	        		$("#mensaje").html(opciones);
 	        	}
 	        }
 	    })
+	}
+}
+
+function consultar_usuario(){
+	//para eviatar lios quitamos tonterias
+	var formulario = document.getElementById("form1")
+	var nombre = eliminar_caracteres_no_validos($("#txtnombre").val());
+	var apellidos = eliminar_caracteres_no_validos($("#txtapellido").val());
+	var dni = eliminar_caracteres_no_validos($("#txtdni").val());
+	var email = eliminar_caracteres_no_validos($("#txtemail").val());
+	var telefono = eliminar_caracteres_no_validos($("#txttelefono").val());
+	var tipo = eliminar_caracteres_no_validos($("#txttipo").val());
+	var correcto = 0;
+	//1º Activamos el aviso para que sea visible
+	$( "#dialog-message" ).dialog( "open" );
+
+	//comprobamos que todos los datos son correctos
+	for(i=0; i < formulario.elements.length; i++)
+	{
+		if(formulario.elements[i].value.length != 0 || 
+			(formulario.elements[i].name == "txttipo" && formulario.elements[i].value == 0))
+			correcto = 1;
+	}
+
+	if(correcto == 0)
+	{
+		$("#mensaje").html("Error: debe completar al menos un campo");
+	}
+	else
+	{
+		//2º mandamos la información para validar el user/pass
+		var parametros = {
+	        "nombre" : $("#txtnombre").val(),
+			"apellidos" : $("#txtapellido").val(),
+			"dni" : $("#txtdni").val(),
+			"email" : $("#txtemail").val(),
+			"telefono" : $("#txttelefono").val(),
+			"tipo" : $("#txttipo").val(),
+			"tipo_consulta" : $("#txttipo_consulta").val() 
+			//este parametro es para saber que queremos hacer con la consulta tipo_consulta = 1 -> solo consulta,
+			//tipo_consulta = 2 -> Se desea modificar el resultado, tipo_consulta = 3 -> se desea eleminar el resultado
+		};
+		$.ajax({
+	        url:"resultado_consulta_usuarios.php",
+	        dataType : "html",//el tipo de datos
+	        data: parametros,
+	        type: "POST",
+	        success: function(opciones){
+	        	//cierro la ventana primero
+	        	$( "#respuesta" ).html(opciones);
+	        	$( "#dialog-message" ).dialog( "close" );
+	        },
+	        error: function (req, status, err){
+	        	$("#mensaje").html(req+"->"+status+"->"+err);
+	        	//$("#mensaje").html("Error: No se puede generar la respuesta intentelo más tarde");
+	        }
+	    });
+	    
 	}
 }
