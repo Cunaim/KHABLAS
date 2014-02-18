@@ -923,6 +923,13 @@ pre code {
   width: 100%;
 }
 
+.col-form-background {
+	background: #f1f2f2 repeat;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	padding-bottom: 30px;
+}
+
 @media (min-width: 768px) {
   .container {
     max-width: 750px;
@@ -1638,6 +1645,57 @@ fieldset {
   border: 0;
 }
 
+/*Formulario general*/
+.form-general:-moz-placeholder {
+  color: #f1f2f2;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.form-general::-moz-placeholder {
+  color: #f1f2f2;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.form-general:-ms-input-placeholder {
+  color: #f1f2f2;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.form-general::-webkit-input-placeholder {
+  color: #f1f2f2;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.form-general {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 17px;
+  line-height: 1.428571429;
+  color: #ec008c;
+  vertical-align: middle;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: 3px solid #67666a;
+  border-radius: 4px;
+  height: 37px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		  margin-bottom: 7px;
+}
+.form-general:focus {
+  border-color: #ec008c;
+  outline: 0;
+  }
+
+/*Fin formulario general*/
+
 legend {
   display: block;
   width: 100%;
@@ -1654,6 +1712,10 @@ label {
   display: inline-block;
   margin-bottom: 5px;
   font-weight: bold;
+  font-family: "Raleway", Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #67666a;
+  
 }
 
 input[type="search"] {
@@ -1745,6 +1807,8 @@ input[type="number"]::-webkit-inner-spin-button {
 -o-animation: animacion 2s ease-in-out infinite;
 animation: animacion 2s ease-in-out infinite;
 }
+
+
 
 @-moz-keyframes animacion {
 0% {
@@ -2079,6 +2143,10 @@ textarea.input-lg {
           user-select: none;
 }
 
+.left {
+	float: left;
+}
+
 .btn:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
@@ -2170,6 +2238,21 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   background-image: none;
+}
+
+.btn-general-form {
+  color: #f1f2f2;
+  background-color: #ec088c;
+  
+}
+
+.btn-general-form:hover,
+.btn-general-form:focus,
+.btn-general-form:active,
+.btn-general-form.active,
+.open .dropdown-toggle.btn-general-form {
+  color: #f1f2f2;
+  background-color: #67666a;
 }
 
 .btn-primary.disabled,

@@ -13,10 +13,10 @@ where tipo_seccion.Id_tipo = '$tipo_user'";
 $menus = mysql_query($menu, $khablasweb) or die(mysql_error());
 $row_menus = mysql_fetch_assoc($menus);
 
-$submenu = "SELECT submenus.Nombre, submenus.URL, submenus.clases, submenu.id_accion from submenus
+$submenu = "SELECT submenus.Nombre, submenus.URL, submenus.clases, submenus.id_accion from submenus
 	inner join permisos on permisos.id_accion = submenus.id_accion
 	where permisos.id_Usuario = '$id_usur' 
-	and submenus.id_seccion = '".$indice_menu."'";
+	and submenus.id_seccion = '$indice_menu' order by submenus.id asc";
 $submenus = mysql_query($submenu, $khablasweb) or die(mysql_error());
 $row_submenus = mysql_fetch_assoc($submenus);
 $nsubmenus = mysql_num_rows($submenus);
@@ -60,22 +60,23 @@ $nsubmenus = mysql_num_rows($submenus);
 		                	</li>
 		                <?php }while($row_menus = mysql_fetch_assoc($menus)); ?>
 		                	<li>
-		                		<a href="generales/Salir.php" >Salir</a>
+		                		<a href="../generales/Salir.php" >Salir</a>
 		                	</li>
 	            	</ul>
 	            </div>
-	            <img class="full-screen-background-image" src="images/fondo-tienda-yoigo-khabls.jpg" />    </div>
+	            <img class="full-screen-background-image" src="../images/fondo-tienda-yoigo-khabls.jpg" />    </div>
             </div>
 		</header>
 		<!-- al ser especial esta vez, creamos dos clases una para el Bienvenido y otra para el formulario -->
 		<section class="section">
+			<div class="overlay-bg"></div>
         	<article class="container">
     			<div class="col-sm-4">
 				<?php if($nsubmenus != 0) { ?>
 					<ul class="nav nav-pills nav-stacked">
 						<?php do{ ?>
 							<li>
-								<a onclick="abrir_enlace_user('<?php echo $row_submenus['URL']; ?>,<?php echo $row_submenus['id_accion']; ?>')" >
+								<a onclick="abrir_enlace_user('<?php echo $row_submenus['URL']; ?>','<?php echo $row_submenus['id_accion']; ?>')" >
 								<i class="<?php echo $row_submenus['clases']; ?>"></i><?php echo $row_submenus['Nombre']; ?></a>
 							</li>
 						<?php }while($row_submenus = mysql_fetch_assoc($submenus)); ?>

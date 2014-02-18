@@ -5,8 +5,8 @@
 
 <article class="col-sm-8" id="formulario">
 	<div class="welcome">
-    	<h1>ESTAS EN USUARIOS</h1>
-        <p style="text-align:center; font-size:18px;">En esta sección podrás gestionar todos lo usuarios que acceden a <h2>K-HABLS 360</h2></p>
+    	<h1>ESTAS EN CLIENTES</h1>
+        <p style="text-align:center; font-size:18px;">En esta sección podrás gestionar todos lo clientes administrados por <h2>K-HABLS 360</h2></p>
     </div>
 </article>
 

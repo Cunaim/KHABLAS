@@ -26,18 +26,18 @@
 	$row_consulta = mysql_fetch_assoc($consultas);
 	$nconsulta = mysql_num_rows($consultas);
 
-$texto = '<h2 class="header-form"> Consulta de Usuario </h2>';
+$texto = "<h2> Consulta de Usuario </h2>";
 if($nconsulta != 0) {
-	$texto .= "<table table class='header'>
+	$texto .= "<table>
 		<tr>
-			<td>Nombre</td>
-			<td>Apellidos</td>
-			<td>DNI</td>
-			<td>Email</td>
-			<td>Teléfono</td>
-			<td>Tipo de Usuario</td>";
+			<td> <label>Nombre</label> </td>
+			<td> <label>Apellidos</label> </td>
+			<td> <label>DNI</label> </td>
+			<td> <label>Email</label> </td>
+			<td> <label>Teléfono</label> </td>
+			<td> <label>Tipo de Usuario</label> </td>";
 			if($_POST['tipo_consulta'] > 2 && $_POST['tipo_consulta'] < 5)
-				$texto .= "<td>Accion</td>";
+				$texto .= "<td> <label>Accion</label> </td>";
 		$texto .= "</tr>";
 		do { 
 			$texto .= "<tr>";

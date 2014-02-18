@@ -29,7 +29,22 @@ h2 {
 	font-weight: 700;
 }
 
+h4 { 
+	color: #fff;
+	font-weight: 700;
+}
 
+.header-form {
+	background: #ec008c repeat;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	width: 100%;
+}
+
+.padding-form {
+	padding: 30px 10px;
+}
+	
 @font-face {
 font-family: 'HRounded';
 src: url('fonts/LTe50853.eot'); /* IE9 Compat Modes */
@@ -243,12 +258,13 @@ animation: animacion 2s ease-in-out infinite;
 
 #footer {
     background: none repeat scroll 0 0 #202022;
-    bottom: 0;
+    bottom: -50%;
     height: 100px;
     padding-top: 0;
-    position: fixed;
+    position: relative;
     transition: position 500ms ease-in-out 0s;
     width: 100%;
+	margin-top: 50px; 
 }
 	
 	
