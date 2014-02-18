@@ -26,8 +26,12 @@
 	$row_consulta = mysql_fetch_assoc($consultas);
 	$nconsulta = mysql_num_rows($consultas);
 
-$texto = '<h2 class="header-form"> Consulta de Usuario </h2>';
+$texto = '<div class="col-sm-12 header-form"><h4>Usuarios Consultados </h4></div>
+			<div class="col-sm-4"></div>
+    			<div class=" col-sm-12 col-form-background">
+          			<div class="table-responsive">';
 if($nconsulta != 0) {
+
 	$texto .= "<table table class='header'>
 		<tr>
 			<td>Nombre</td>
@@ -59,5 +63,8 @@ if($nconsulta != 0) {
 } else {
 	$texto .= "<h3> No Existen Datos </h3>";
 }
+
+$texto .= "		</div>
+			</div>";
 
 echo $texto;

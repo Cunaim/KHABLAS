@@ -1,3 +1,58 @@
+function tipo_usuario_permisos()
+{
+	if($("#txttipo").val() != 0)
+	{
+		$("#div_permisos").css("visibility", "visible");
+		var parametros = {
+	        "id_tipo" : $("#txttipo").val()
+		}
+		$.ajax({
+	        url:"consultar_permisos_usuarios.php",
+	        dataType : "html",//el tipo de datos
+	        data:parametros,
+	        type: "POST",
+	        success: function(opciones){
+	        	$("#txtpermisos").html(opciones);
+	        },
+	        error: function (req, status, err){
+	        	$("#mensaje").html(req+"->"+status+"->"+err);
+	        	//$("#mensaje").html("Error: No se puede generar la respuesta intentelo más tarde");
+	        }
+	    })
+	} else {
+		$("#div_permisos").css("visibility", "hidden");
+		$("#txtpermisos").html("<option value='0'>--Seleccione los Permisos -- </option>");
+	}
+}
+
+function actualizar_permisos_tipo()
+{
+	//1º Activamos el aviso para que sea visible
+	$( "#dialog-message" ).dialog( "open" );
+	if($("#txttipo").val() != 0 && $("#id_permisos").val() != '')
+	{
+		var parametros = {
+	        "id_tipo" : $("#txttipo").val(),
+	        "id_permisos": $("#txtpermisos").val()
+		}
+		$.ajax({
+	        url:"actualizar_permisos_usuarios.php",
+	        dataType : "html",//el tipo de datos
+	        data:parametros,
+	        type: "POST",
+	        success: function(opciones){
+	        	$("#mensaje").html("Permisos Modificados Correctamente");
+	        },
+	        error: function (req, status, err){
+	        	$("#mensaje").html(req+"->"+status+"->"+err);
+	        	//$("#mensaje").html("Error: No se puede generar la respuesta intentelo más tarde");
+	        }
+	    })
+	}
+	else
+		$("#mensaje").html("Debe Rellenar el Tipo de Usuario y Los Permisos que tiene");
+}
+
 function Crear_nuevo_user()
 {
 	//para eviatar lios quitamos tonterias
@@ -247,7 +302,7 @@ function Actualizar_user(id)
 			correcto = 0;
 			break;
 		}
-		else if(formulario.elements[i].name == "txtemail" && !validateEmail(formulario.elements[i].value))
+		else if(formulario.elements[i].name == "txtemail" && validateEmail(formulario.elements[i].value))
 		{
 			$("#mensaje").html("Error: El Email introducido no es valido");
 			formulario.elements[i].focus();

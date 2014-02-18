@@ -47,7 +47,6 @@
         </div>
         
     </form>
-    <div id="respuesta" name = "respuesta" class="resultados col-sm-12"> </div>
 </div>
 
-
+<div id="respuesta" name = "respuesta" class="resultados"> </div>

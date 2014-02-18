@@ -1,14 +1,57 @@
-function Crear_nuevo_user()
+function consulta_cif_clientes()
+{
+	var parametros = {
+        "tipo_cif" : $("#txttipo_cliente").val()
+	}
+	$.ajax({
+        url:"consultar_cif_clientes.php",
+        dataType : "html",//el tipo de datos
+        data:parametros,
+        type: "POST",
+        success: function(opciones){
+        	$("#txtCIF_user").html(opciones);
+        }
+    })
+}
+
+function cambio_label(label, texto)
+{
+	$(label).html = texto;
+}
+
+function seleccionar_cliente()
+{
+	var tipo = $("#txttipo_cliente").val();
+	switch(tipo){
+		case "1":
+			cambio_label("lbl_cambio", "Nombre Comercial");
+			$("#div_cif_asociado").css("visibility", "hidden");
+			break;
+		case "2":
+			cambio_label("lbl_cambio", "Matricula");
+			$("#div_cif_asociado").css("visibility", "visible");
+			consulta_cif_clientes();
+			break;
+		default:
+			cambio_label("lbl_cambio", " ");
+			$("#div_cif_asociado").css("visibility", "hidden");
+			break;
+	}
+}
+
+function Crear_nuevo_cliente()
 {
 	//para eviatar lios quitamos tonterias
-	var formulario = document.getElementById("form1")
-	var nombre = eliminar_caracteres_no_validos($("#txtnombre").val());
-	var apellidos = eliminar_caracteres_no_validos($("#txtapellido").val());
-	var dni = eliminar_caracteres_no_validos($("#txtdni").val());
+	var formulario = document.getElementById("form1");
+	var tipo_cliente = eliminar_caracteres_no_validos($("txttipo_cliente").val());
+	var cif_asociado = eliminar_caracteres_no_validos($("txtCIF_user").val());
+	var matricula = eliminar_caracteres_no_validos($("#txtnombre").val());
+	var cif = eliminar_caracteres_no_validos($("#txtCIF").val());
 	var email = eliminar_caracteres_no_validos($("#txtemail").val());
 	var telefono = eliminar_caracteres_no_validos($("#txttelefono").val());
-	var tipo = eliminar_caracteres_no_validos($("#txttipo").val());
-	var usuario = eliminar_caracteres_no_validos($("#txtuser").val());
+	var direccion = eliminar_caracteres_no_validos($("#txtdireccion").val());
+	var Localidad = eliminar_caracteres_no_validos($("#txtlocalidad").val());
+	var CPostal = eliminar_caracteres_no_validos($("#txtCPostal").val());
 	var pass = eliminar_caracteres_no_validos($("#txtpass").val());
 	var correcto = 1;
 

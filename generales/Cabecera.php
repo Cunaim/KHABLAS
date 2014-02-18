@@ -35,6 +35,7 @@ $nsubmenus = mysql_num_rows($submenus);
 		<script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
 		<script type="text/javascript" src="../js/modernizr.js"></script>
 		<script type="text/javascript" src="../js/js_user.js"></script>
+		<script type="text/javascript" src="../js/js_clientes.js"></script>
 		<script type="text/javascript" src="../js/js_generales.js"></script>
 		<!-- para los diferentes jquerys que use, si quieres esto se puede cambiar en la pagina de jqueryui -->
 		<link rel="stylesheet" type="text/css" href="../css/jquery-ui-1.10.4.custom.css" media="all">
