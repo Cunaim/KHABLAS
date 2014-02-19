@@ -33,7 +33,7 @@ function actualizar_permisos_tipo()
 	{
 		var parametros = {
 	        "id_tipo" : $("#txttipo").val(),
-	        "id_permisos": $("#txtpermisos").val()
+	        "id_permisos": $("#txtpermisos").val(),
 		}
 		$.ajax({
 	        url:"actualizar_permisos_usuarios.php",
@@ -233,25 +233,36 @@ function eliminar_usuario(id)
 	    });
 }
 
-function modificar_usuario(id)
+function modificar_usuario(id, datos)
 {
 	$( "#dialog-message" ).dialog( "open" );
-	var parametros = { "id_user" : id };
+	datos2 = datos.split("-"); 
+
+	var parametros = { 
+		"id_user" : id,
+		"nombre" : datos2[0],
+		"apellidos" : datos2[1],
+		"dni" : datos2[2],
+		"email" : datos2[3],
+		"telefono" : datos2[4],
+		"tipo" : datos2[5],
+		"tipo_consulta" : datos2[6]
+	};
 	$.ajax({
-	        url:"modificar_usuario.php",
-	        dataType : "html",//el tipo de datos
-	        data: parametros,
-	        type: "POST",
-	        success: function(opciones){
-	        	//cierro la ventana primero
-	        	$( "#formulario" ).html(opciones);
-	        	$( "#dialog-message" ).dialog( "close" );
-	        },
-	        error: function (req, status, err){
-	        	$("#mensaje").html(req+"->"+status+"->"+err);
-	        	//$("#mensaje").html("Error: No se puede generar la respuesta intentelo más tarde");
-	        }
-	    });
+        url:"modificar_usuario.php",
+        dataType : "html",//el tipo de datos
+        data: parametros,
+        type: "POST",
+        success: function(opciones){
+        	//cierro la ventana primero
+        	$( "#formulario" ).html(opciones);
+        	$( "#dialog-message" ).dialog( "close" );
+        },
+        error: function (req, status, err){
+        	$("#mensaje").html(req+"->"+status+"->"+err);
+        	//$("#mensaje").html("Error: No se puede generar la respuesta intentelo más tarde");
+        }
+    });
 }
 
 function Actualizar_user(id)
@@ -302,7 +313,7 @@ function Actualizar_user(id)
 			correcto = 0;
 			break;
 		}
-		else if(formulario.elements[i].name == "txtemail" && validateEmail(formulario.elements[i].value))
+		else if(formulario.elements[i].name == "txtemail" && !validateEmail(formulario.elements[i].value))
 		{
 			$("#mensaje").html("Error: El Email introducido no es valido");
 			formulario.elements[i].focus();
@@ -342,6 +353,43 @@ function Actualizar_user(id)
 	        success: function(opciones){
 	        		$("#mensaje").html(opciones);
 	        }
-	    })
+	    });
 	}
+}
+
+function volver_consultar_user()
+{
+	//1º cojo los datos antes de nada para no perderlos
+	var parametros_consulta = { "accion": "3" }; 
+	var parametros = {
+        "nombre" : $("#txtnombre_vuelta").val(),
+		"apellidos" : $("#txtapellido_vuelta").val(),
+		"dni" : $("#txtdni_vuelta").val(),
+		"email" : $("#txtemail_vuelta").val(),
+		"telefono" : $("#txttelefono_vuelta").val(),
+		"tipo" : $("#txttipo_vuelta").val(),
+		"tipo_consulta" : "3"
+	}
+	$( "#dialog-message" ).dialog( "open" );
+	//2º el 1º ajax me trae el formulario de consulta a la vista
+	$.ajax({
+        url:"../user/consultar_usuario.php",
+        dataType : "html",//el tipo de datos que espero recibir
+        data:parametros_consulta,
+        type: "POST",
+        success: function(opciones){
+    		//segundo ajax me trae el resultado de la consulta
+    		$( "#formulario" ).html(opciones);
+			$.ajax({
+		        url:"resultado_consulta_usuarios.php",
+		        dataType : "html",//el tipo de datos que espero recibir
+		        data:parametros,
+		        type: "POST",
+		        success: function(opciones){
+		        	$("#dialog-message").dialog( "close" );
+		        	$("#respuesta").html(opciones);
+		        }
+		    })
+		}
+	})
 }

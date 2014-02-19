@@ -10,8 +10,8 @@
             <div class="container">
                 <div class="navbar-brand">
                     <ul class="list-inline cinfo-social-buttons">
-                            <li><a href="https://twitter.com/ExperienciaSexM" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-15"></i></a></li>
-                            <li><a href="https://www.facebook.com/ExperienciaSex" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-15"></i></a></li>
+                            <li><a href="https://twitter.com/KHabls" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-15"></i></a></li>
+                            <li><a href="https://www.facebook.com/KHabls?ref=hl" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-15"></i></a></li>
                             
                         </ul>
                 </div>

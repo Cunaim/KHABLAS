@@ -98,7 +98,7 @@ function Crear_nuevo_cliente()
 		}
 		else if(formulario.elements[i].name == "txtpermisos" && document.elements[i].selectedIndex == -1)
 		{
-			$("#mensaje").html("Error: Debe Introducir algun permiso al usuario");
+			$("#mensaje").html("Error: Debe Introducir algun permiso al cliente");
 			formulario.elements[i].focus();
 			correcto = 0;
 			break;
@@ -115,12 +115,12 @@ function Crear_nuevo_cliente()
 			"email" : $("#txtemail").val(),
 			"telefono" : $("#txttelefono").val(),
 			"tipo" : $("#txttipo").val(),
-			"usuario" : $("#txtuser").val(),
+			"cliente" : $("#txtuser").val(),
 			"pass" : $("#txtpass").val(),
 			"permisos" : $("#txtpermisos").val()
 		}
 		$.ajax({
-	        url:"guardar_nuevo_usuario.php",
+	        url:"guardar_nuevo_cliente.php",
 	        dataType : "json",//el tipo de datos
 	        data:parametros,
 	        type: "POST",
@@ -133,7 +133,7 @@ function Crear_nuevo_cliente()
 							if(formulario.elements[i].name != "btncrear")
 								formulario.elements[i].value = "";
 					}
-	        		$("#mensaje").html("Usuario Dado de alta Correctamente");
+	        		$("#mensaje").html("cliente Dado de alta Correctamente");
 	        	}
 	        	else {
 	        		$("#mensaje").html(opciones);
@@ -143,7 +143,7 @@ function Crear_nuevo_cliente()
 	}
 }
 
-function consultar_usuario(){
+function consultar_cliente(){
 	//para eviatar lios quitamos tonterias
 	var formulario = document.getElementById("form1")
 	var nombre = eliminar_caracteres_no_validos($("#txtnombre").val());
@@ -183,7 +183,7 @@ function consultar_usuario(){
 			//tipo_consulta = 2 -> Se desea modificar el resultado, tipo_consulta = 3 -> se desea eleminar el resultado
 		};
 		$.ajax({
-	        url:"resultado_consulta_usuarios.php",
+	        url:"resultado_consulta_clientes.php",
 	        dataType : "html",//el tipo de datos
 	        data: parametros,
 	        type: "POST",
@@ -201,12 +201,12 @@ function consultar_usuario(){
 	}
 }
 
-function eliminar_usuario(id)
+function eliminar_cliente(id)
 {
 	$( "#dialog-message" ).dialog( "open" );
 	var parametros = { "id_user" : id };
 	$.ajax({
-	        url:"dar_baja_usuario.php",
+	        url:"dar_baja_cliente.php",
 	        dataType : "html",//el tipo de datos
 	        data: parametros,
 	        type: "POST",
@@ -221,12 +221,12 @@ function eliminar_usuario(id)
 	    });
 }
 
-function modificar_usuario(id)
+function modificar_cliente(id)
 {
 	$( "#dialog-message" ).dialog( "open" );
 	var parametros = { "id_user" : id };
 	$.ajax({
-	        url:"modificar_usuario.php",
+	        url:"modificar_cliente.php",
 	        dataType : "html",//el tipo de datos
 	        data: parametros,
 	        type: "POST",
@@ -242,7 +242,7 @@ function modificar_usuario(id)
 	    });
 }
 
-function Actualizar_user(id)
+function Actualizar_cliente(id)
 {
 	//para eviatar lios quitamos tonterias
 	var formulario = document.getElementById("form1")
@@ -252,7 +252,7 @@ function Actualizar_user(id)
 	var email = eliminar_caracteres_no_validos($("#txtemail").val());
 	var telefono = eliminar_caracteres_no_validos($("#txttelefono").val());
 	var tipo = eliminar_caracteres_no_validos($("#txttipo").val());
-	var usuario = eliminar_caracteres_no_validos($("#txtuser").val());
+	var cliente = eliminar_caracteres_no_validos($("#txtuser").val());
 	var pass = eliminar_caracteres_no_validos($("#txtpass").val());
 	var correcto = 1;
 
@@ -299,7 +299,7 @@ function Actualizar_user(id)
 		}
 		else if(formulario.elements[i].name == "txtpermisos" && document.elements[i].selectedIndex == -1)
 		{
-			$("#mensaje").html("Error: Debe Introducir algun permiso al usuario");
+			$("#mensaje").html("Error: Debe Introducir algun permiso al cliente");
 			formulario.elements[i].focus();
 			correcto = 0;
 			break;
@@ -316,14 +316,14 @@ function Actualizar_user(id)
 			"email" : $("#txtemail").val(),
 			"telefono" : $("#txttelefono").val(),
 			"tipo" : $("#txttipo").val(),
-			"usuario" : $("#txtuser").val(),
+			"cliente" : $("#txtuser").val(),
 			"pass" : $("#txtpass").val(),
 			"permisos" : $("#txtpermisos").val(),
 			"id_user" : $("#txtiduser").val(),
 			"estado" : $("#txtestado").val()
 		}
 		$.ajax({
-	        url:"actualizar_usuario.php",
+	        url:"actualizar_cliente.php",
 	        dataType : "html",//el tipo de datos que espero recibir
 	        data:parametros,
 	        type: "POST",

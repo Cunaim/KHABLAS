@@ -14,7 +14,15 @@
 
 	$permiso = "SELECT Id, Nombre FROM accion order by Nombre asc";
 	$permisos = mysql_query($permiso, $khablasweb) or die(mysql_error());
-	$row_permiso = mysql_fetch_assoc($permisos)
+	$row_permiso = mysql_fetch_assoc($permisos);
+
+	//obtenemos los valores necesario para la vuelta
+	$nombre = $_POST['nombre'];
+	$apellidos = $_POST['apellidos'];
+	$dni = $_POST['dni'];
+	$email = $_POST['email'];
+	$telefono = $_POST['telefono'];
+	$tipo = $_POST['tipo'];
 ?>
 
 
@@ -54,6 +62,8 @@
 			<input type="hidden" id="txtiduser" name="txtiduser" value ="<?php echo $_POST['id_user']; ?>" />
 			<input type="button" id="btnActualizara" name="btnActualizara" value="Actualizar" onclick="Actualizar_user();"
 				class="btn btn-general-form left"/>
+			<input type="button" id="btnvolver" name="btnvolver" value="Volver" onclick="volver_consultar_user();"
+				class="btn btn-general-form left"/>
 		</div>
 
     	<div class="col-sm-6">
@@ -89,6 +99,19 @@
 				<option value="0" <?php if( $row_usuario['dado_baja'] == 0 ) echo "selected"; ?> >Activo</option>
 			</select>
 		</div>
+		<!--guardamos las variables para hacer el volver -->
+		<input type='hidden' id='txtnombre_vuelta' name='txtnombre_vuelta' 
+			value = "<?php if($_POST['nombre'] != "Cu4l0u13r4") echo $_POST['nombre']; else echo 'Cu4l0u13r4'; ?> " />
+		<input type='hidden' id='txtapellido_vuelta' name='txtapellido_vuelta' 
+			value = "<?php if($_POST['apellidos'] != "Cu4l0u13r4") echo $_POST['apellidos']; else echo 'Cu4l0u13r4'; ?>" />
+		<input type='hidden' id='txtdni_vuelta' name='txtdni_vuelta' 
+		value = "<?php if($_POST['dni'] != "Cu4l0u13r4") echo $_POST['dni']; else echo 'Cu4l0u13r4'; ?> " />
+		<input type='hidden' id='txtemail_vuelta' name='txtemail_vuelta' 
+			value = "<?php if($_POST['email'] != "Cu4l0u13r4") echo $_POST['email']; else echo 'Cu4l0u13r4'; ?> " />
+		<input type='hidden' id='txttelefono_vuelta' name='txttelefono_vuelta' 
+			value = "<?php if($_POST['telefono'] != "Cu4l0u13r4") echo $_POST['telefono']; else echo 'Cu4l0u13r4'; ?> " />
+		<input type='hidden' id='txttipo_vuelta' name='txttipo_vuelta' 
+			value = "<?php if($_POST['tipo'] != "Cu4l0u13r4") echo $_POST['tipo']; else echo '0'; ?> " />
     </form>
 </div>
 
